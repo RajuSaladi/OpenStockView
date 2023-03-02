@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Open Stock View</title>
+        <link rel="icon" type="image/x-icon" href="./../static/images/logo.jpg">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+        <script src="https://use.fontawesome.com/973aa1b100.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body {font-family: Arial;}
+            
+            /* Style the tab */
+            .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            }
+            
+            /* Style the buttons inside the tab */
+            .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            }
+            
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+            background-color: #ddd;
+            }
+            
+            /* Create an active/current tablink class */
+            .tab button.active {
+            background-color: #ccc;
+            }
+            
+            /* Style the tab content */
+            .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            }
+        </style>
+
+        <style>
+            #mySidenav a {
+            position: absolute;
+            left: -80px;
+            transition: 0.3s;
+            padding: 15px;
+            width: 100px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            }
+
+            #mySidenav a:hover {
+            left: 0;
+            }
+
+            #youtube {
+            top: 20px;
+            background-color: #04AA6D;
+            }
+
+            #blog {
+            top: 80px;
+            background-color: #2196F3;
+            }
+
+            #projects {
+            top: 140px;
+            background-color: #f44336;
+            }
+
+            #contact {
+            top: 200px;
+            background-color: #555
+            }
+        </style>
+
+        <style>
+            input[type="text"]{ padding: 20px 10px; width: 500px;border-radius: 4px;}
+
+            .button {
+            border-radius: 1px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 20px 10px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            }
+            
+            .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+            }
+            
+            .button span:after {
+            content: '\00bb';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -20px;
+            transition: 0.5s;
+            }
+            
+            .button:hover span {
+            padding-right: 25px;
+            }
+            
+            .button:hover span:after {
+            opacity: 1;
+            right: 0;
+            }
+        </style>
+
+
+        <style>
+            .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            }
+            
+            .dropbtn:hover, .dropbtn:focus {
+            background-color: #3e8e41;
+            }
+            
+            #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            }
+            
+            #myInput:focus {outline: 3px solid #ddd;}
+            
+            .dropdown {
+            position: relative;
+            display: inline-block;
+            }
+            
+            .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+            }
+            
+            .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            }
+            
+            .dropdown a:hover {background-color: #ddd;}
+            
+            .show {display: block;}
+        </style>
+
+        <style>
+            body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+            
+            * {
+            box-sizing: border-box;
+            }
+            
+            .bg-image {
+            /* The image used */
+            background-image: url('./../static/images/banner.png');
+            
+            /* Add the blur effect */
+            filter: blur(8px);
+            -webkit-filter: blur(8px);
+            
+            /* Full height */
+            height: 100%; 
+            
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+            
+            /* Position text in the middle of the page/image */
+            .bg-text {
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+            color: white;
+            font-weight: bold;
+            border: 3px solid #f1f1f1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+            }
+        </style>
+    
+
+    </head>
+    <body>
+
+        <div class="bg-image"></div>
+        <div class="bg-text">
+            <h1 style="font-size:50px">Open Stocks View</h1>
+            <p>sponsored by OpenKnowledgeShare</p>
+
+            <div class="row"  action="/search">
+                <div class="col-xs-10">
+                    <form class="form-inline" action="/search">
+                        <input class="form-control" type="text" name="search" placeholder="Search your Stock here" autocomplete="off">
+                        <button class="button" type="submit"><span>Search</span></button>
+                    </form>
+                </div>
+            </div>
+
+            <!--
+            <div class="row">
+                <div class="col-xs-4">
+                    <label> Click on the "Choose File" button to upload a file:</label>
+                    <form action = "/forward" method = "post" enctype="multipart/form-data">
+                        <input type="file" id="myFile" name="filename">
+                        <button class="button" name="forwardBtn" type="submit" id="file_upload">Upload</button>
+                    </form>
+                </div>
+            </div>
+            -->
+        </div>
+        <!--
+        <div class="container">
+
+            <div class="row">
+                <img src="./../assets/banner.png" alt="Open Stock View Banner" width="100%" height="20%" class="responsive">
+            </div>
+        </div>
+        -->
+
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Overview')">Overview</button>
+            <button class="tablinks" onclick="openTab(event, 'HistoryView')">HistoryView</button>
+            <button class="tablinks" onclick="openTab(event, 'Fundamentals')">Fundamentals</button>
+        </div>
+
+        <div id="Overview" class="tabcontent">
+        <h3>Overview</h3>
+            <p>This is the selected Stock</p>
+            <label>   
+                {% for line in display_text %}
+                {{ line }}
+                {% endfor %}
+            </label>
+        </div>
+        <div id="HistoryView" class="tabcontent">
+        <h3>History View</h3>
+            <div class="col-xs-3">
+                <label> Choose the column to plot....</label>
+                <select class="dropbtn" id ='column_name_select'>
+                    {% for this_column in columns_list %}
+                    <option value= "{{this_column}}" SELECTED>{{this_column}}</option>"
+                    {% endfor %}
+                </select>
+            </div>
+
+            <p>Here is the history plot of the stock</p>
+            <div class="chart" id="bargraph">
+                <script>
+                    var graphs = {{plot | safe}};
+                    Plotly.plot('bargraph',graphs,{});
+                </script>
+            </div>
+        </div>
+        <div id="Fundamentals" class="tabcontent">
+        <h3>Fundamentals</h3>
+            <p>Stocks Fundamentals are as follows</p>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="https://www.youtube.com/c/OpenKnowledgeShare" id="youtube">Youtube</a>
+            <a href="https://openknowledgeshare.blogspot.com/" id="blog">Blog</a>
+            <a href="https://github.com/RajuSaladi/PythonProgramming2022" id="projects">Github</a>
+            <a href="https://t.me/openknowledgeshare" id="contact">Contact</a>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+        <script>
+            function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        </script>
+
+    </body>
+</html>
