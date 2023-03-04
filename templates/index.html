@@ -286,6 +286,7 @@
             <button class="tablinks" onclick="openTab(event, 'Overview')">Overview</button>
             <button class="tablinks" onclick="openTab(event, 'HistoryView')">HistoryView</button>
             <button class="tablinks" onclick="openTab(event, 'Analysis')">Analysis</button>
+            <button class="tablinks" onclick="openTab(event, 'TechnicalAnalysis')">TechnicalAnalysis</button>
         </div>
 
         <div id="Overview" class="tabcontent">
@@ -331,6 +332,25 @@
                     {{ table|safe }}
                 {% endfor %}
             </div>
+        </div>
+
+        <div id="TechnicalAnalysis" class="tabcontent">
+            <h3>Technical Analysis</h3>
+                <div class="col-xs-3">
+                    <label> Choose the column to plot....</label>
+                    <select class="dropbtn" id ='column_name_select'>
+                        {% for this_column in columns_list %}
+                        <option value= "{{this_column}}" SELECTED>{{this_column}}</option>"
+                        {% endfor %}
+                    </select>
+                </div>
+                <h2>Here are the Technical Plots of the stock</h2>
+                <div class="chart" id="technicalgraph">
+                    <script>
+                        var graphs = {{technical_plots | safe}};
+                        Plotly.plot('technicalgraph',graphs,{});
+                    </script>
+                </div>
         </div>
 
         <div id="mySidenav" class="sidenav">
