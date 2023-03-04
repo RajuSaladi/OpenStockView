@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from Analyzer import analyze
 from Analyzer import similar_stocks
+from TechnicalAnalysis import moving_average
 import json
 import pdb
 
@@ -46,11 +47,13 @@ def index():
     plot_json = plot_data(data_df, column_name='close')
     get_analysis(data_df)
     get_similarity()
+    do_technical_analysis(data_df)
     return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST),
                            display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]),
                            analysis_tables=session.get('analysis_tables'),
                            analysis_titles=session.get('analysis_titles'),
-                           similarity_tables=session.get('similarity_tables')
+                           similarity_tables=session.get('similarity_tables'),
+                           technical_plots=session.get('technical_plots')
                            )
 
 def update_file_path():
@@ -120,11 +123,13 @@ def processing_file():
     plot_json = plot_data(data_df, column_name='close')
     get_analysis(data_df)
     get_similarity()
+    do_technical_analysis(data_df)
     return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST),
                            display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]),
                            analysis_tables=session.get('analysis_tables'),
                            analysis_titles=session.get('analysis_titles'),
-                           similarity_tables=session.get('similarity_tables')
+                           similarity_tables=session.get('similarity_tables'),
+                           technical_plots=session.get('technical_plots')
                            )
 
 def get_dataframe():
@@ -133,7 +138,7 @@ def get_dataframe():
     data_df = pd.read_csv(input_file_path)
     data_df = data_df.drop(data_df.columns[0], axis=1)
     session['data_columns'] = data_df.columns.tolist()[1:]
-    data_df.plot(x="date", y="close", rot=90)
+    # data_df.plot(x="date", y="close", rot=90)
     return data_df
 
 @app.route('/plot', methods=['GET', 'POST'])
@@ -157,6 +162,10 @@ def get_analysis(input_df):
 def get_similarity():
     session['similarity_tables'] = []
     session['similarity_tables'].append(similar_stocks.get_similar_stocks(session['current_stock']))
+
+def do_technical_analysis(input_df):
+    session['technical_plots'] = moving_average.plot_technical_graphs(input_df, short_window=20, longer_window=50)
+    print("moving average successfull")
 
 
 if __name__ == '__main__':
