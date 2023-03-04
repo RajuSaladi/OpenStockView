@@ -7,6 +7,8 @@ import plotly.graph_objs as go
 import plotly.express as px
 import pandas as pd
 import numpy as np
+from Analyzer import analyze
+from Analyzer import similar_stocks
 import json
 import pdb
 
@@ -16,8 +18,12 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 path = os.getcwd()
 # file Upload
 UPLOAD_FOLDER = os.path.join(path, 'uploads')
-DATA_FOLDER = 'E:\PythonCodes\StockAnalysis\Data\IndianStocks_IntradayData'
+DATA_FOLDER = r"E:\PythonCodes\StockAnalysis\Data\IndianStocks_IntradayData"
 COLUMNS_LIST = ['open', 'close', 'high', 'low', 'volume']
+DEFAULT_ANALYSIS_TABLES = [pd.DataFrame().to_html(), pd.DataFrame().to_html()]
+DEFAULT_ANALYSIS_TITLES = ['year', 'month']
+DEFAULT_SIMILAR_STOCKS = [pd.DataFrame().to_html()]
+
 if not os.path.isdir(UPLOAD_FOLDER):
     os.mkdir(UPLOAD_FOLDER)
 
@@ -32,10 +38,20 @@ def index():
     session['current_stock'] = 'ACC'
     session['data_type'] = 'day'
     session['data_columns'] = COLUMNS_LIST
+    session['analysis_tables'] = DEFAULT_ANALYSIS_TABLES
+    session['analysis_titles'] = DEFAULT_ANALYSIS_TITLES
+    session['similarity_tables'] = DEFAULT_SIMILAR_STOCKS
     update_file_path()
     data_df = get_dataframe()
     plot_json = plot_data(data_df, column_name='close')
-    return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST), display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]))
+    get_analysis(data_df)
+    get_similarity()
+    return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST),
+                           display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]),
+                           analysis_tables=session.get('analysis_tables'),
+                           analysis_titles=session.get('analysis_titles'),
+                           similarity_tables=session.get('similarity_tables')
+                           )
 
 def update_file_path():
     stock_name = session.get('current_stock')
@@ -102,8 +118,14 @@ def processing_file():
     print("Reading with new file.....", )
     data_df = get_dataframe()
     plot_json = plot_data(data_df, column_name='close')
-    return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST), display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]))
-
+    get_analysis(data_df)
+    get_similarity()
+    return render_template('index.html', plot=plot_json, columns_list=session.get('data_columns', COLUMNS_LIST),
+                           display_text=session.get('text_to_show_list', ["NO TEXT to DISPLAY"]),
+                           analysis_tables=session.get('analysis_tables'),
+                           analysis_titles=session.get('analysis_titles'),
+                           similarity_tables=session.get('similarity_tables')
+                           )
 
 def get_dataframe():
     input_file_path = session.get('input_file_path', './data/input_file.csv')
@@ -119,6 +141,8 @@ def change_plot():
     column_name = request.args['selected']
     update_file_path()
     data_df = get_dataframe()
+    get_analysis(data_df)
+    get_similarity()
     return plot_data(data_df, column_name)
 
 def plot_data(input_df, column_name=None):
@@ -126,6 +150,14 @@ def plot_data(input_df, column_name=None):
     fig = px.line(input_df, x='date', y=column_name, title='Time Series with Rangeslider')
     fig.update_xaxes(rangeslider_visible=True)
     return fig.to_json()
+
+def get_analysis(input_df):
+    session['analysis_tables'], session['analysis_titles'] = analyze.run(input_df)
+
+def get_similarity():
+    session['similarity_tables'] = []
+    session['similarity_tables'].append(similar_stocks.get_similar_stocks(session['current_stock']))
+
 
 if __name__ == '__main__':
     app.run()
