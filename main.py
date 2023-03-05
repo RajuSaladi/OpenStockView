@@ -9,7 +9,7 @@ import pandas as pd
 import numpy as np
 from Analyzer import analyze
 from Analyzer import similar_stocks
-from TechnicalAnalysis import moving_average
+from TechnicalAnalysis import techinal_decider
 import json
 import pdb
 
@@ -164,7 +164,7 @@ def get_similarity():
     session['similarity_tables'].append(similar_stocks.get_similar_stocks(session['current_stock']))
 
 def do_technical_analysis(input_df):
-    session['technical_plots'] = moving_average.plot_technical_graphs(input_df, short_window=20, longer_window=50)
+    session['technical_plots'] = techinal_decider.plot_technical_graphs(input_df, short_window=20, longer_window=50)
 
 
 if __name__ == '__main__':
