@@ -165,7 +165,6 @@ def get_similarity():
 
 def do_technical_analysis(input_df):
     session['technical_plots'] = moving_average.plot_technical_graphs(input_df, short_window=20, longer_window=50)
-    print("moving average successfull")
 
 
 if __name__ == '__main__':
