@@ -130,6 +130,72 @@
             }
         </style>
 
+        <style>
+            .btn {
+            background-color: #f4511e;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            font-size: 16px;
+            margin: 4px 2px;
+            opacity: 0.6;
+            transition: 0.3s;
+            }
+            .btn:hover {opacity: 1}
+
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 60px;
+                height: 34px;
+            }
+
+            .switch input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+        </style>
 
         <style>
             .dropbtn {
@@ -231,19 +297,19 @@
             }
         </style>
     
-    <style>
-        table, th, td {
-          border: 1px solid black;
-          border-collapse: collapse;
-        }
-        th, td {
-          padding: 5px;
-        }
-        th {
-          text-align: left;
-        }
-    </style>
-        
+        <style>
+            table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+            th, td {
+            padding: 5px;
+            }
+            th {
+            text-align: left;
+            }
+        </style>
+
     </head>
     <body>
 
@@ -287,6 +353,7 @@
             <button class="tablinks" onclick="openTab(event, 'HistoryView')">HistoryView</button>
             <button class="tablinks" onclick="openTab(event, 'Analysis')">Analysis</button>
             <button class="tablinks" onclick="openTab(event, 'TechnicalAnalysis')">TechnicalAnalysis</button>
+            <button class="tablinks" onclick="openTab(event, 'BackTesting')">BackTesting</button>
         </div>
 
         <div id="Overview" class="tabcontent">
@@ -352,6 +419,13 @@
                     </script>
                 </div>
         </div>
+        <div id="BackTesting" class="tabcontent">
+            <h3>BackTesting</h3>
+                <p>Check your Strategy</p>
+                <span id="backtest_strategy_forms"></span>
+                <button class="btn" onclick="addInput()">Add Strategy</button>
+                <button class="btn" type="submit" onclick="runBackTest()">Run Backtesting</button>
+        </div>
 
         <div id="mySidenav" class="sidenav">
             <a href="https://www.youtube.com/c/OpenKnowledgeShare" id="youtube">Youtube</a>
@@ -376,6 +450,43 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
+        </script>
+        <script>
+            var countBox =1;
+            var boxName = "backtest_0";
+            function addInput()
+            {
+                    var boxName="backtest_"+countBox;
+                    var newdiv = document.createElement('div');
+                    newdiv.className="backtest_"+countBox;
+                    newdiv.innerHTML= `
+                                    <form class="form-inline">
+                                        <label class="switch"><input type="checkbox" name="Enable_"`+boxName+`"><span class="slider"></span></label>
+                                        <input type="text" id="indicator1"_`+boxName+`" placeholder="Select indicator" name="indicator1">
+                                        <select class="dropbtn" id ="column_name_select"_`+boxName+`">
+                                            <option value= "CrossOver" SELECTED>CrossOver</option>"
+                                            <option value= "Greaterthan" SELECTED>Greaterthan</option>"
+                                            <option value= "Lessthan" SELECTED>Lessthan</option>"
+                                            <option value= "Equals" SELECTED>Equals</option>"
+                                        </select>
+                                        <input type="text" id="indicator2"_`+boxName+`" placeholder="Select indicator" name="indicator2">
+                                        <button class="btn" onClick="deleteStrategy('${newdiv.className}')"><i class="fa fa-close"></i></button>
+                                    </form>
+                                    `;
+                    document.getElementById('backtest_strategy_forms').appendChild(newdiv);
+                    countBox += 1;
+            }
+            function deleteStrategy(divname) {
+                console.log("deleted");
+                document.getElementById("backtest_strategy_forms").removeChild(document.getElementsByClassName(divname)[0]);
+                countBox -= 1;
+            }
+        </script>
+        <script>
+                function runBackTest()
+                {
+
+                }
         </script>
 
     </body>
