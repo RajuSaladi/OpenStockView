@@ -421,10 +421,24 @@
         </div>
         <div id="BackTesting" class="tabcontent">
             <h3>BackTesting</h3>
-                <p>Check your Strategy</p>
+            <p>Check your Strategy</p>
+            <!--
+            <button class="btn" id="addstrategy_button" name="addstrategy_button" onclick=addInput()>Add Strategy</button>
+            <form class="form-inline" action="/runbacktest" method="POST">
                 <span id="backtest_strategy_forms"></span>
-                <button class="btn" onclick="addInput()">Add Strategy</button>
-                <button class="btn" type="submit" onclick="runBackTest()">Run Backtesting</button>
+                <button class="btn" id="backtest_button" type="submit" name="backtest_button" onclick=runBackTest() >Run Backtesting</button>
+            </form>
+            -->
+            <form class="form-inline" action="/runbacktest">
+                <textarea id="strategy_text" name="strategy_text" rows="4" cols="50"></textarea>
+                <button class="button" type="submit"><span>Run Backtesting</span></button>
+            </form>>
+            <h2>Summary from Backtesting</h2>
+            <div id="backtest_result" class="rendered_html">
+                {% for backtest in backtest_results %}
+                    {{ backtest|safe }}
+                {% endfor %}
+            </div>
         </div>
 
         <div id="mySidenav" class="sidenav">
@@ -458,20 +472,18 @@
             {
                     var boxName="backtest_"+countBox;
                     var newdiv = document.createElement('div');
-                    newdiv.className="backtest_"+countBox;
+                    newdiv.className="strategy";
                     newdiv.innerHTML= `
-                                    <form class="form-inline">
-                                        <label class="switch"><input type="checkbox" name="Enable_"`+boxName+`"><span class="slider"></span></label>
-                                        <input type="text" id="indicator1"_`+boxName+`" placeholder="Select indicator" name="indicator1">
-                                        <select class="dropbtn" id ="column_name_select"_`+boxName+`">
-                                            <option value= "CrossOver" SELECTED>CrossOver</option>"
-                                            <option value= "Greaterthan" SELECTED>Greaterthan</option>"
-                                            <option value= "Lessthan" SELECTED>Lessthan</option>"
-                                            <option value= "Equals" SELECTED>Equals</option>"
+                                        <label class="switch"><input type="checkbox" id="strategy_enable" name="strategy_enable"><span class="slider"></span></label>
+                                        <input type="text" id="indicator1" placeholder="Select indicator" name="indicator1">S
+                                        <select id ="indicator_relation" name="indicator_relation>
+                                            <option value="CrossOver" SELECTED>CrossOver</option>"
+                                            <option value="Greaterthan" SELECTED>Greaterthan</option>"
+                                            <option value="Lessthan" SELECTED>Lessthan</option>"
+                                            <option value="Equals" SELECTED>Equals</option>"
                                         </select>
-                                        <input type="text" id="indicator2"_`+boxName+`" placeholder="Select indicator" name="indicator2">
+                                        <input type="text" id="indicator2" placeholder="Select indicator" name="indicator2">
                                         <button class="btn" onClick="deleteStrategy('${newdiv.className}')"><i class="fa fa-close"></i></button>
-                                    </form>
                                     `;
                     document.getElementById('backtest_strategy_forms').appendChild(newdiv);
                     countBox += 1;
@@ -482,12 +494,5 @@
                 countBox -= 1;
             }
         </script>
-        <script>
-                function runBackTest()
-                {
-
-                }
-        </script>
-
     </body>
 </html>
