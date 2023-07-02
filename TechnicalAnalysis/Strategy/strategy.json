@@ -1,0 +1,246 @@
+{
+    "CDL2CROWS": {
+        "title": "Two Crows",
+        "signal": "BUY"
+    },
+    "CDL3BLACKCROWS": {
+        "title": "Three Black Crows",
+        "signal": "BUY"
+    },
+    "CDL3INSIDE": {
+        "title": "Three Inside Up/Down",
+        "signal": "BUY"
+    },
+    "CDL3LINESTRIKE": {
+        "title": "Three-Line Strike",
+        "signal": "BUY"
+    },
+    "CDL3OUTSIDE": {
+        "title": "Three Outside Up/Down",
+        "signal": "BUY"
+    },
+    "CDL3STARSINSOUTH": {
+        "title": "Three Stars In The South",
+        "signal": "BUY"
+    },
+    "CDL3WHITESOLDIERS": {
+        "title": "Three Advancing White Soldiers",
+        "signal": "BUY"
+    },
+    "CDLABANDONEDBABY": {
+        "title": "Abandoned Baby",
+        "signal": "BUY"
+    },
+    "CDLADVANCEBLOCK": {
+        "title": "Advance Block",
+        "signal": "BUY"
+    },
+    "CDLBELTHOLD": {
+        "title": "Belt-hold",
+        "signal": "BUY"
+    },
+    "CDLBREAKAWAY": {
+        "title": "Breakaway",
+        "signal": "BUY"
+    },
+    "CDLCLOSINGMARUBOZU": {
+        "title": "Closing Marubozu",
+        "signal": "BUY"
+    },
+    "CDLCONCEALBABYSWALL": {
+        "title": "Concealing Baby Swallow",
+        "signal": "BUY"
+    },
+    "CDLCOUNTERATTACK": {
+        "title": "Counterattack",
+        "signal": "BUY"
+    },
+    "CDLDARKCLOUDCOVER": {
+        "title": "Dark Cloud Cover",
+        "signal": "BUY"
+    },
+    "CDLDOJI": {
+        "title": "Doji",
+        "signal": "BUY"
+    },
+    "CDLDOJISTAR": {
+        "title": "Doji Star",
+        "signal": "BUY"
+    },
+    "CDLDRAGONFLYDOJI": {
+        "title": "Dragonfly Doji",
+        "signal": "BUY"
+    },
+    "CDLENGULFING": {
+        "title": "Engulfing Pattern",
+        "signal": "BUY"
+    },
+    "CDLEVENINGDOJISTAR": {
+        "title": "Evening Doji Star",
+        "signal": "BUY"
+    },
+    "CDLEVENINGSTAR": {
+        "title": "Evening Star",
+        "signal": "BUY"
+    },
+    "CDLGAPSIDESIDEWHITE": {
+        "title": "Up/Down-gap side-by-side white lines",
+        "signal": "BUY"
+    },
+    "CDLGRAVESTONEDOJI": {
+        "title": "Gravestone Doji",
+        "signal": "BUY"
+    },
+    "CDLHAMMER": {
+        "title": "Hammer",
+        "signal": "BUY"
+    },
+    "CDLHANGINGMAN": {
+        "title": "Hanging Man",
+        "signal": "BUY"
+    },
+    "CDLHARAMI": {
+        "title": "Harami Pattern",
+        "signal": "BUY"
+    },
+    "CDLHARAMICROSS": {
+        "title": "Harami Cross Pattern",
+        "signal": "BUY"
+    },
+    "CDLHIGHWAVE": {
+        "title": "High-Wave Candle",
+        "signal": "BUY"
+    },
+    "CDLHIKKAKE": {
+        "title": "Hikkake Pattern",
+        "signal": "BUY"
+    },
+    "CDLHIKKAKEMOD": {
+        "title": "Modified Hikkake Pattern",
+        "signal": "BUY"
+    },
+    "CDLHOMINGPIGEON": {
+        "title": "Homing Pigeon",
+        "signal": "BUY"
+    },
+    "CDLIDENTICAL3CROWS": {
+        "title": "Identical Three Crows",
+        "signal": "BUY"
+    },
+    "CDLINNECK": {
+        "title": "In-Neck Pattern",
+        "signal": "BUY"
+    },
+    "CDLINVERTEDHAMMER": {
+        "title": "Inverted Hammer",
+        "signal": "BUY"
+    },
+    "CDLKICKING": {
+        "title": "Kicking",
+        "signal": "BUY"
+    },
+    "CDLKICKINGBYLENGTH": {
+        "title": "Kicking - bull/bear determined by the longer marubozu",
+        "signal": "BUY"
+    },
+    "CDLLADDERBOTTOM": {
+        "title": "Ladder Bottom",
+        "signal": "BUY"
+    },
+    "CDLLONGLEGGEDDOJI": {
+        "title": "Long Legged Doji",
+        "signal": "BUY"
+    },
+    "CDLLONGLINE": {
+        "title": "Long Line Candle",
+        "signal": "BUY"
+    },
+    "CDLMARUBOZU": {
+        "title": "Marubozu",
+        "signal": "BUY"
+    },
+    "CDLMATCHINGLOW": {
+        "title": "Matching Low",
+        "signal": "BUY"
+    },
+    "CDLMATHOLD": {
+        "title": "Mat Hold",
+        "signal": "BUY"
+    },
+    "CDLMORNINGDOJISTAR": {
+        "title": "Morning Doji Star",
+        "signal": "BUY"
+    },
+    "CDLMORNINGSTAR": {
+        "title": "Morning Star",
+        "signal": "BUY"
+    },
+    "CDLONNECK": {
+        "title": "On-Neck Pattern",
+        "signal": "BUY"
+    },
+    "CDLPIERCING": {
+        "title": "Piercing Pattern",
+        "signal": "BUY"
+    },
+    "CDLRICKSHAWMAN": {
+        "title": "Rickshaw Man",
+        "signal": "BUY"
+    },
+    "CDLRISEFALL3METHODS": {
+        "title": "Rising/Falling Three Methods",
+        "signal": "BUY"
+    },
+    "CDLSEPARATINGLINES": {
+        "title": "Separating Lines",
+        "signal": "BUY"
+    },
+    "CDLSHOOTINGSTAR": {
+        "title": "Shooting Star",
+        "signal": "BUY"
+    },
+    "CDLSHORTLINE": {
+        "title": "Short Line Candle",
+        "signal": "BUY"
+    },
+    "CDLSPINNINGTOP": {
+        "title": "Spinning Top",
+        "signal": "BUY"
+    },
+    "CDLSTALLEDPATTERN": {
+        "title": "Stalled Pattern",
+        "signal": "BUY"
+    },
+    "CDLSTICKSANDWICH": {
+        "title": "Stick Sandwich",
+        "signal": "BUY"
+    },
+    "CDLTAKURI": {
+        "title": "Takuri (Dragonfly Doji with very long lower shadow)",
+        "signal": "BUY"
+    },
+    "CDLTASUKIGAP": {
+        "title": "Tasuki Gap",
+        "signal": "BUY"
+    },
+    "CDLTHRUSTING": {
+        "title": "Thrusting Pattern",
+        "signal": "BUY"
+    },
+    "CDLTRISTAR": {
+        "title": "Tristar Pattern",
+        "signal": "BUY"
+    },
+    "CDLUNIQUE3RIVER": {
+        "title": "Unique 3 River",
+        "signal": "BUY"
+    },
+    "CDLUPSIDEGAP2CROWS": {
+        "title": "Upside Gap Two Crows",
+        "signal": "BUY"
+    },
+    "CDLXSIDEGAP3METHODS": {
+        "title": "Upside/Downside Gap Three Methods",
+        "signal": "BUY"
+    }
+}
